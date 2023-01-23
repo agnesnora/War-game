@@ -1,0 +1,66 @@
+body {
+  background-image: url("green-velvet.jpg");
+  background-repeat: none;
+  background-size: cover;
+  margin: 0 auto;
+  font-family: "DynaPuff", cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height:100vh;
+  
+}
+
+button {
+  font-family: "DynaPuff", cursive;
+  font-size: 1em;
+  background-color: #ea8948;
+  color: #14051e;
+  text-transform: uppercase;
+  padding: 0.8em 1.5em;
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.15em;
+}
+
+button:hover {
+  background-color: #  color: #14051e;
+  ;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+#getTwo {
+  margin: 0;
+
+  /* -ms-transform: translate(-50%, -50%); */
+  width: 60vw;
+  font-size: 1.2em;
+}
+#nextDeckBtn {
+}
+
+#cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-slot {
+  border: #14051e 2px solid;
+  border-radius: 10px;
+  height: 270px;
+  width: calc(270px * 5 / 7);
+  margin: 2em auto;
+}
+.card{
+  width:100%;
+}
+
+/* div.card-slot:nth-of-type(1) {
+  margin-bottom: 50px;
+} */

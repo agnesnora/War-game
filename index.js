@@ -18,13 +18,10 @@ document.getElementById("getTwo").addEventListener("click", function () {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      dataArray = data.cards;
-
-      dataArray.forEach(function (img) {
-        document.getElementById(
-          "cards"
-        ).innerHTML += `<img src="${img.image}">`;
-      });
+      document.getElementById("cards").children[0].innerHTML = `
+      <img src=${data.cards[0].image} class="card"/>`;
+      document.getElementById("cards").children[1].innerHTML = `
+      <img src=${data.cards[1].image} class="card">`;
     });
 });
 
@@ -56,4 +53,14 @@ document.getElementById("getTwo").addEventListener("click", function () {
  *      Note: you'll need to get a new deck every time you refresh the page,
  *      since you're only saving your deckId in a local variable right now
  * 2. Log those 2 cards to the console
+ */
+/**
+ * Challenge:
+ *
+ * Start making this look lots nicer :)
+ *
+ * 1. Add a card table background with the img/table.png image provided.
+ * 2. Move the draw button to the very bottom of the page, full width
+ * 3. Add some button styles. You can use the photo on the slides
+ * for one option.
  */
