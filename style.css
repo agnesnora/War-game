@@ -83,6 +83,11 @@ h4{
   margin-left:1em;
   
 }
+
+.disabled{
+  background-color:rgb(107, 107, 107);
+ 
+}
 /* div.card-slot:nth-of-type(1) {
   margin-bottom: 50px;
 } */

@@ -9,12 +9,14 @@ const remaining = document.getElementById("remaining");
 newDeckBtn.addEventListener("click", handleClick);
 
 function handleClick() {
+  enableButton();
   fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       deckid = data.deck_id;
       console.log(deckid);
+      remaining.textContent = `Remaining cards: 54`;
     });
 }
 
@@ -23,6 +25,10 @@ drawBtn.addEventListener("click", function () {
     .then((res) => res.json())
     .then((data) => {
       console.log("remaining:", data.remaining);
+      if (data.remaining === 0) {
+        console.log("ez man nulla");
+        disableButton();
+      }
       remaining.textContent = `Remaining cards: ${data.remaining}`;
       let card1Value = data.cards[0].value;
       console.log(card1Value);
@@ -70,7 +76,14 @@ function determineCardWinner(card1, card2) {
     return `war`;
   }
 }
-
+function disableButton() {
+  drawBtn.disabled = true;
+  drawBtn.classList.add("disabled");
+}
+function enableButton() {
+  drawBtn.disabled = false;
+  drawBtn.classList.remove("disabled");
+}
 //  * Challenge:
 //  *
 //  * Try to determine which of the 2 cards is the "winner" (has higher value)
