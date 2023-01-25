@@ -4,6 +4,7 @@ const cardsContainer = document.getElementById("cards");
 const newDeckBtn = document.getElementById("nextDeckBtn");
 const drawBtn = document.getElementById("getTwo");
 const message = document.getElementById("message");
+const remaining = document.getElementById("remaining");
 
 newDeckBtn.addEventListener("click", handleClick);
 
@@ -21,17 +22,21 @@ drawBtn.addEventListener("click", function () {
   fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckid}/draw/?count=2`)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      console.log("remaining:", data.remaining);
+      remaining.textContent = `Remaining cards: ${data.remaining}`;
       let card1Value = data.cards[0].value;
       console.log(card1Value);
       let card2Value = data.cards[1].value;
       console.log(card2Value);
 
-      determineCardWinner(card1Value, card2Value);
+      // determineCardWinner(card1Value, card2Value);
       cardsContainer.children[0].innerHTML = `
       <img src=${data.cards[0].image} class="card"/>`;
       cardsContainer.children[1].innerHTML = `
       <img src=${data.cards[1].image} class="card">`;
+
+      const winnerText = determineCardWinner(card1Value, card2Value);
+      message.textContent = winnerText;
     });
 });
 function determineCardWinner(card1, card2) {
@@ -58,13 +63,11 @@ function determineCardWinner(card1, card2) {
   console.log("2:", card2ValueIndex);
 
   if (card1ValueIndex > card2ValueIndex) {
-    console.log("computer wins");
-    return (message.innerHTML = `Computer wins`);
+    return `Computer wins`;
   } else if (card2ValueIndex > card1ValueIndex) {
-    return (message.innerHTML = `You win`);
+    return `You win`;
   } else {
-    console.log("war");
-    return (message.innerHTML = `war`);
+    return `war`;
   }
 }
 

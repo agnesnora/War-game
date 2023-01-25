@@ -51,7 +51,7 @@ button:hover {
 }
 
 .card-slot {
-  border: #14051e 2px solid;
+  border:whitesmoke 2px solid;
   border-radius: 10px;
   height: 270px;
   width: calc(270px * 5 / 7);
@@ -64,10 +64,24 @@ button:hover {
 h2{
   text-transform: uppercase;
   font-size: 1.5em;
+  padding:0.8em 1em;
+}
+
+#header{
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+h2,
+h4{
   text-shadow: 2px 2px#14051e;
   color:whitesmoke;
-  padding:0.8em 1em;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
+}
+h4{
+  margin-left:1em;
+  
 }
 /* div.card-slot:nth-of-type(1) {
   margin-bottom: 50px;
