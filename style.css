@@ -55,7 +55,7 @@ button:hover {
   border-radius: 10px;
   height: 270px;
   width: calc(270px * 5 / 7);
-  margin: 1em auto;
+  margin: 0.7em auto;
 }
 .card{
   width:100%;

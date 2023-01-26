@@ -12,7 +12,8 @@ let yourScore = 0;
 newDeckBtn.addEventListener("click", handleClick);
 
 function handleClick() {
-  drawBtn.classList.remove("disabled");
+  drawBtn.disabled = false;
+  // drawBtn.classList.remove("disabled");
 
   fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
     .then((res) => res.json())
@@ -29,11 +30,7 @@ drawBtn.addEventListener("click", function () {
     .then((res) => res.json())
     .then((data) => {
       console.log("remaining:", data.remaining);
-      if (data.remaining === 0) {
-        console.log("ez man nulla");
 
-        drawBtn.disabled = true;
-      }
       remaining.textContent = `Remaining cards: ${data.remaining}`;
       let card1Value = data.cards[0].value;
       console.log(card1Value);
@@ -53,6 +50,29 @@ drawBtn.addEventListener("click", function () {
 
       const winnerText = determineCardWinner(card1Value, card2Value);
       message.textContent = winnerText;
+
+      if (data.remaining === 0) {
+        if (computerScore > yourScore) {
+          message.textContent = `The computer is the winner`;
+        } else if (yourScore > computerScore) {
+          message.textContent = `you are the winner`;
+        } else if (yourScore === computerScore) {
+          message.textContent = `its a tie`;
+        }
+
+        drawBtn.disabled = true;
+        computerScore = 0;
+        yourScore = 0;
+      }
+
+      // if (data.remaining === 0) {
+      //   console.log("ez man nulla");
+      //   const finalWinner = winnerOfGame();
+      //   message.textContent = finalWinner;
+
+      //   drawBtn.disabled = true;
+      // }
+      // remaining.textContent = `Remaining cards: ${data.remaining}`;
     });
 });
 function determineCardWinner(card1, card2) {
@@ -90,6 +110,7 @@ function determineCardWinner(card1, card2) {
     return `war`;
   }
 }
+
 // function disableButton() {
 //   drawBtn.disabled = true;
 //   drawBtn.classList.add("disabled");
