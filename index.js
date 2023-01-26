@@ -1,15 +1,19 @@
 let deckid = "";
 let dataArray = [];
 const cardsContainer = document.getElementById("cards");
+const scoreContainer = document.getElementById("score");
 const newDeckBtn = document.getElementById("nextDeckBtn");
 const drawBtn = document.getElementById("getTwo");
 const message = document.getElementById("message");
 const remaining = document.getElementById("remaining");
+let computerScore = 0;
+let yourScore = 0;
 
 newDeckBtn.addEventListener("click", handleClick);
 
 function handleClick() {
-  enableButton();
+  drawBtn.classList.remove("disabled");
+
   fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
     .then((res) => res.json())
     .then((data) => {
@@ -27,7 +31,8 @@ drawBtn.addEventListener("click", function () {
       console.log("remaining:", data.remaining);
       if (data.remaining === 0) {
         console.log("ez man nulla");
-        disableButton();
+
+        drawBtn.disabled = true;
       }
       remaining.textContent = `Remaining cards: ${data.remaining}`;
       let card1Value = data.cards[0].value;
@@ -37,9 +42,14 @@ drawBtn.addEventListener("click", function () {
 
       // determineCardWinner(card1Value, card2Value);
       cardsContainer.children[0].innerHTML = `
-      <img src=${data.cards[0].image} class="card"/>`;
+      <h4>Computer's score: ${computerScore}</h4>`;
       cardsContainer.children[1].innerHTML = `
+      <img src=${data.cards[0].image} class="card"/>`;
+      cardsContainer.children[2].innerHTML = `
       <img src=${data.cards[1].image} class="card">`;
+      cardsContainer.children[3].innerHTML = `
+      <h4>Your score: ${yourScore}</h4>
+      `;
 
       const winnerText = determineCardWinner(card1Value, card2Value);
       message.textContent = winnerText;
@@ -69,21 +79,25 @@ function determineCardWinner(card1, card2) {
   console.log("2:", card2ValueIndex);
 
   if (card1ValueIndex > card2ValueIndex) {
+    computerScore++;
+    console.log("computer:", computerScore);
     return `Computer wins`;
   } else if (card2ValueIndex > card1ValueIndex) {
+    yourScore++;
+    console.log("your:", yourScore);
     return `You win`;
   } else {
     return `war`;
   }
 }
-function disableButton() {
-  drawBtn.disabled = true;
-  drawBtn.classList.add("disabled");
-}
-function enableButton() {
-  drawBtn.disabled = false;
-  drawBtn.classList.remove("disabled");
-}
+// function disableButton() {
+//   drawBtn.disabled = true;
+//   drawBtn.classList.add("disabled");
+// }
+// function enableButton() {
+//   drawBtn.disabled = false;
+//   drawBtn.classList.remove("disabled");
+// }
 //  * Challenge:
 //  *
 //  * Try to determine which of the 2 cards is the "winner" (has higher value)

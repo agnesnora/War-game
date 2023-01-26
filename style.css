@@ -55,7 +55,7 @@ button:hover {
   border-radius: 10px;
   height: 270px;
   width: calc(270px * 5 / 7);
-  margin: 2em auto;
+  margin: 1em auto;
 }
 .card{
   width:100%;
@@ -84,7 +84,7 @@ h4{
   
 }
 
-.disabled{
+button:disabled{
   background-color:rgb(107, 107, 107);
  
 }
